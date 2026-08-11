@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.20)
 
 project(j1939_dds_gateway VERSION 1.0.0 LANGUAGES C)
 
+if(MSVC)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+endif()
+
 option(J1939_DDS_ENABLE_CYCLONEDDS "Build the Cyclone DDS publisher and subscriber" OFF)
 option(J1939_DDS_FETCH_CYCLONEDDS "Fetch Cyclone DDS when it is not installed" OFF)
 option(J1939_DDS_BUILD_TESTING "Build unit and integration tests" ON)

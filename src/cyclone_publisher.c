@@ -117,6 +117,24 @@ int cyclone_publisher_create(telemetry_publisher_t *publisher, int domain_id)
         return -1;
     }
 
+    {
+        int attempt;
+        dds_publication_matched_status_t matched_status;
+
+        for (attempt = 0; attempt < 50; ++attempt) {
+            memset(&matched_status, 0, sizeof(matched_status));
+            if (dds_get_publication_matched_status(context->writer, &matched_status) ==
+                    DDS_RETCODE_OK &&
+                matched_status.current_count > 0) {
+                break;
+            }
+            dds_sleepfor(DDS_MSECS(100));
+        }
+        if (attempt == 50) {
+            fprintf(stderr, "Warning: no DDS subscriber matched within 5 seconds\n");
+        }
+    }
+
     publisher->context = context;
     publisher->publish = publish_to_cyclone;
     publisher->destroy = destroy_cyclone_publisher;

@@ -16,7 +16,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Configure
         run: >-
           cmake -S . -B build
@@ -31,7 +31,7 @@ jobs:
     name: ASan and UBSan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Configure
         run: >-
           cmake -S . -B build-sanitize
@@ -46,7 +46,7 @@ jobs:
     name: Cyclone DDS integration build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Configure
         run: >-
           cmake -S . -B build-dds
