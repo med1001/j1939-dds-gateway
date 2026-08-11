@@ -1,0 +1,14 @@
+services:
+  subscriber:
+    build: .
+    network_mode: host
+    entrypoint: ["./build-dds/telemetry_subscriber"]
+    command: ["--domain", "0"]
+
+  gateway:
+    build: .
+    network_mode: host
+    depends_on:
+      - subscriber
+    command:
+      ["--replay", "samples/j1939_frames.csv", "--publisher", "dds", "--domain", "0"]

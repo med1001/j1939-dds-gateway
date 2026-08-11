@@ -1,0 +1,15 @@
+module Vehicle {
+    @final
+    struct Telemetry {
+        string<31> source_id;
+        unsigned long long timestamp_ms;
+        unsigned long last_pgn;
+        octet source_address;
+        boolean engine_speed_valid;
+        double engine_speed_rpm;
+        boolean vehicle_speed_valid;
+        double vehicle_speed_kph;
+        boolean coolant_temperature_valid;
+        double coolant_temperature_c;
+    };
+};
